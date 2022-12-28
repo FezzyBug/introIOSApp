@@ -44,8 +44,8 @@ class ViewController: UIViewController {
         //This is where we begin to add additional animal selections below
         popUpAnimalButton.menu = UIMenu(children : [
             UIAction(title: "What Animal Do you have?", state : .on, handler: optionClosure),
-            UIAction(title: "Cat",  handler: optionClosure),
-            UIAction(title: "Dog",  handler: optionClosure)])
+            UIAction(title: "Cats",  handler: optionClosure),
+            UIAction(title: "Dogs",  handler: optionClosure)])
         
         popUpAnimalButton.showsMenuAsPrimaryAction = true
         popUpAnimalButton.changesSelectionAsPrimaryAction = true
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         
         // Creating a variable of type string, that holds an introduction. The introduction interpolates the values from the text fields provided.
         // Currently we can only present the information in a print statement. However, this lets us verify that our app is printing out what is intended!
-        let introduction = "My name is \(frstNTxtField.text!) \(lstNTxtField.text!) and I attend \(schoolTxtField.text!). I am currently in my \(year!) year and I own \(numOfPets.text!) dogs. It is \(morePetSwitch.isOn) that I want more pets." + "\n" +  popUpButtonSelectionChanged(popUpAnimalButton)
+        let introduction = "My name is \(frstNTxtField.text!) \(lstNTxtField.text!) and I attend \(schoolTxtField.text!). I am currently in my \(year!) year and I own \(numOfPets.text!) \(popUpAnimalButton.titleLabel?.text ?? ""). It is \(morePetSwitch.isOn) that I want more pets." + "\n" +  popUpButtonSelectionChanged(popUpAnimalButton)
         
         // Creates the alert where we pass in our message, which our introduction.
         let alertController = UIAlertController(title: "My Introduction", message: introduction, preferredStyle: .alert)
@@ -88,9 +88,9 @@ class ViewController: UIViewController {
     func popUpButtonSelectionChanged(_ sender: UIButton) -> String{
         let selectedItem = sender.titleLabel?.text
         
-        if selectedItem == "Cat" {
+        if selectedItem == "Cats" {
             return("🐱")
-        } else if selectedItem == "Dog" {
+        } else if selectedItem == "Dogs" {
             return("🐶")
         }
         return("🤖")
