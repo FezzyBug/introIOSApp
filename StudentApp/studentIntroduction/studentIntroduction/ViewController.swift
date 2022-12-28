@@ -16,27 +16,32 @@ class ViewController: UIViewController {
     @IBOutlet weak var schoolTxtField: UITextField!
     
     
-// Button Controls
+// Button Controls and Label output for number of Pets
     
     @IBOutlet weak var popUpAnimalButton: UIButton!
-    
-    
     @IBOutlet weak var schoolYearSegment: UISegmentedControl!
     @IBOutlet weak var petCountStpr: UIStepper!
     @IBOutlet weak var morePetSwitch: UISwitch!
-    
-    
     @IBOutlet weak var numOfPets: UILabel!
     
+    
+    
+    //Function Section
+    
+    
+    /*
+     This function handles changes in the stepper switch and relays them to the num of Pets label.
+     */
     @IBAction func stepperDidChange(_ sender: UIStepper) {
-       
     numOfPets.text = "\(Int(sender.value))"
    }
     
     
+    //Handles setting up the options present in our popup button in popUpAnimalButton and allows selection of different student animals
     @IBAction func buttonPressed() {
         let optionClosure = {(action : UIAction) in print(action.title)}
         
+        //This is where we begin to add additional animal selections below
         popUpAnimalButton.menu = UIMenu(children : [
             UIAction(title: "What Animal Do you have?", state : .on, handler: optionClosure),
             UIAction(title: "Cat",  handler: optionClosure),
@@ -49,11 +54,10 @@ class ViewController: UIViewController {
     
 
 
-
     
-    
-    
-    
+    /*
+     This Function handles providing an alert box that introduces the student
+     */
     
     @IBAction func introduceSelfDidTapped(_ sender: UIButton) {
         
@@ -62,9 +66,7 @@ class ViewController: UIViewController {
         
         // Creating a variable of type string, that holds an introduction. The introduction interpolates the values from the text fields provided.
         // Currently we can only present the information in a print statement. However, this lets us verify that our app is printing out what is intended!
-        let introduction = "My name is \(frstNTxtField.text!) \(lstNTxtField.text!) and I attend \(schoolTxtField.text!). I am currently in my \(year!) year and I own \(numOfPets.text!) dogs. It is \(morePetSwitch.isOn) that I want more pets. "
-
-        
+        let introduction = "My name is \(frstNTxtField.text!) \(lstNTxtField.text!) and I attend \(schoolTxtField.text!). I am currently in my \(year!) year and I own \(numOfPets.text!) dogs. It is \(morePetSwitch.isOn) that I want more pets." + "\n" +  popUpButtonSelectionChanged(popUpAnimalButton)
         
         // Creates the alert where we pass in our message, which our introduction.
         let alertController = UIAlertController(title: "My Introduction", message: introduction, preferredStyle: .alert)
@@ -78,6 +80,25 @@ class ViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
         
+    
+    /*
+     This function adds an animal emoji to the alertbox introduction in the
+     introduceSelfDidTapped function
+     */
+    func popUpButtonSelectionChanged(_ sender: UIButton) -> String{
+        let selectedItem = sender.titleLabel?.text
+        
+        if selectedItem == "Cat" {
+            return("🐱")
+        } else if selectedItem == "Dog" {
+            return("🐶")
+        }
+        return("🤖")
+        
+    }
+    
+    
+
     
     
     
@@ -97,8 +118,6 @@ class ViewController: UIViewController {
         
         //Makes our animal selection button have rounded edges
         popUpAnimalButton.layer.cornerRadius = 10
-
-
     }
 
 
