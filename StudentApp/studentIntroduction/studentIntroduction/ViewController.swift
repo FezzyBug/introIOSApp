@@ -17,6 +17,10 @@ class ViewController: UIViewController {
     
     
 // Button Controls
+    
+    @IBOutlet weak var popUpAnimalButton: UIButton!
+    
+    
     @IBOutlet weak var schoolYearSegment: UISegmentedControl!
     @IBOutlet weak var petCountStpr: UIStepper!
     @IBOutlet weak var morePetSwitch: UISwitch!
@@ -30,6 +34,25 @@ class ViewController: UIViewController {
    }
     
     
+    @IBAction func buttonPressed() {
+        let optionClosure = {(action : UIAction) in print(action.title)}
+        
+        popUpAnimalButton.menu = UIMenu(children : [
+            UIAction(title: "What Animal Do you have?", state : .on, handler: optionClosure),
+            UIAction(title: "Cat",  handler: optionClosure),
+            UIAction(title: "Dog",  handler: optionClosure)])
+        
+        popUpAnimalButton.showsMenuAsPrimaryAction = true
+        popUpAnimalButton.changesSelectionAsPrimaryAction = true
+    
+    }
+    
+
+
+
+    
+    
+    
     
     
     @IBAction func introduceSelfDidTapped(_ sender: UIButton) {
@@ -39,7 +62,7 @@ class ViewController: UIViewController {
         
         // Creating a variable of type string, that holds an introduction. The introduction interpolates the values from the text fields provided.
         // Currently we can only present the information in a print statement. However, this lets us verify that our app is printing out what is intended!
-        let introduction = "My name is \(frstNTxtField.text!) \(lstNTxtField.text!) and I attend \(schoolTxtField.text!). I am currently in my \(year!) year and I own \(numOfPets.text!) dogs. It is \(morePetSwitch.isOn) that I want more pets."
+        let introduction = "My name is \(frstNTxtField.text!) \(lstNTxtField.text!) and I attend \(schoolTxtField.text!). I am currently in my \(year!) year and I own \(numOfPets.text!) dogs. It is \(morePetSwitch.isOn) that I want more pets. "
 
         
         
@@ -54,15 +77,7 @@ class ViewController: UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-
-
-    
-    
-    
-    
-    
-    
-    
+        
     
     
     
@@ -71,7 +86,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+//        self.view.backgroundColor = UIColor.tintColor
+    
+        //Changing the background color to a custom black
+        self.view.backgroundColor = UIColor.white
+        
+        //Sets up our pop button slection for popUpAnimalButton
+        buttonPressed()
+        
+        
+        //Makes our animal selection button have rounded edges
+        popUpAnimalButton.layer.cornerRadius = 10
+
+
     }
+
 
 
 }
