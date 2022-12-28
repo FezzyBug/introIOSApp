@@ -3,3 +3,7 @@ This is the required prework for the CodePath iOS Development (Spring 2023) Appl
 
 
 ## New Features
+
+- Added pop up to scroll through animal selection
+- Added new functions tha print emojis in the alert box
+- Added place holders text for textfields inside of the introduction app
